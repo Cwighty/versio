@@ -1,0 +1,23 @@
+services:
+  searchclient:
+    build:
+      context: ../../src/ScriptureSearch/
+      target: final
+    ports:
+      - 8080:8080
+
+  chroma:
+    image: ghcr.io/chroma-core/chroma:latest
+    volumes:
+      - index_data:/chroma/chroma/
+    ports:
+      - 8000:8000
+
+  searchapi:
+    build: ../../src/SearchApi/
+    volumes:
+      - ../../src/SearchApi:/app
+
+volumes:
+  index_data:
+    driver: local

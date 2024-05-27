@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+    <!-- Add SCSS files to dotnet watch -->
+  <ItemGroup>
+    <Watch Include="**\*.scss" />
+    <None Update="**\*.css" watch="false" />
+  </ItemGroup>
+
+  <!-- Compile SCSS files into CSS -->
+  <ItemGroup>
+    <ComponentScssFiles Include="**/*/*.scss" Exclude="node_modules/**;wwwroot/**;Styles/**" />
+  </ItemGroup>
+
+  <Target Name="CompileGlobalSass" BeforeTargets="Compile">
+    <Message Text="Compiling global SCSS file" Importance="high" />
+    <Exec Command="npm run sass -- --style=compressed Styles:wwwroot/css" />
+  </Target>
+
+</Project>

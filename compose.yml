@@ -1,0 +1,32 @@
+services:
+  searchclient:
+    build:
+      context: ./src/ScriptureSearch/
+      target: development
+    ports:
+      - 8080:8080
+    command: dotnet watch --no-launch-profile --non-interactive --no-hot-reload
+    develop:
+     watch:
+        - action: sync
+          path: ./src/ScriptureSearch
+          target: /source
+          ignore:
+            - /source/bin
+            - /source/obj
+
+  chroma:
+    image: ghcr.io/chroma-core/chroma:latest
+    volumes:
+      - ./chroma:/chroma/chroma/
+    ports:
+      - 8000:8000
+
+  searchapi:
+    build: ./src/SearchApi/
+    environment:
+      - FLASK_ENV=development
+    volumes:
+      - ./src/SearchApi:/app
+
+

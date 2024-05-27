@@ -1,0 +1,103 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+@import "Core/demo-variables";
+@import "base";
+@import "navbar";
+
+
+$primary-color: #1a1a1a;
+$secondary-color: #2c2c2c;
+$text-color: #f5f5f5;
+$accent-color: #db2828;
+$enable-caret: false;
+
+// Import Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Override Bootstrap variables
+$body-bg: $primary-color;
+$body-color: $text-color;
+$btn-border-radius: 1rem;
+$input-border-radius: 1rem;
+$btn-primary-bg: $accent-color;
+$btn-primary-border: $accent-color;
+$btn-primary-color: $text-color;
+
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/utilities";
+
+// Custom styles
+body {
+  background-color: $primary-color;
+  color: $text-color;
+}
+
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.btn {
+  border-radius: $btn-border-radius;
+  background-color: $btn-primary-bg;
+  border-color: $btn-primary-border;
+  color: $btn-primary-color;
+
+  &:hover {
+    background-color: lighten($btn-primary-bg, 10%);
+    border-color: lighten($btn-primary-border, 10%);
+  }
+}
+
+.form-control {
+  border-radius: $input-border-radius;
+  background-color: $secondary-color;
+  border-color: lighten($secondary-color, 10%);
+  color: $text-color;
+  border: none;
+
+  &:focus {
+    background-color: lighten($secondary-color, 5%);
+    border: none;
+    box-shadow: none;
+  }
+  &:active {
+    background-color: lighten($secondary-color, 5%);
+    border: none;
+  }
+}
+
+.navbar {
+  background-color: $secondary-color;
+  border-bottom: 1px solid lighten($secondary-color, 10%);
+}
+
+.card {
+  background-color: $secondary-color;
+  border: none;
+  border-radius: 0.5rem;
+  color: $text-color;
+}
+
+.header {
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem; // Adjust the size as needed
+    color: $text-color;
+    text-align: center;
+    margin-bottom: 2rem; // Spacing between the header and the search bar
+  }
+
+
+ .list-group-item{
+    background-color: $secondary-color;
+  &:hover {
+    background-color: lighten($secondary-color, 5%);
+  }
+ }
+
+// Then import Bootstrap
