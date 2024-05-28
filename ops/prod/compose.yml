@@ -12,7 +12,7 @@ services:
       - index_data:/chroma/chroma/
 
   searchapi:
-    build: ../../src/SearchApi/
+    image: cwighty/versio:latest
     volumes:
       - ../../src/SearchApi:/app
 
