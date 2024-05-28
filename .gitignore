@@ -9,6 +9,8 @@ scriptures/*
 **/models/*
 chroma/*
 embeddings/*
+**/lds-scriptures*/*
+**/embeddings/*
 
 # dotenv files
 .env
@@ -489,3 +491,4 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+src/SearchApi/lds-scriptures.zip

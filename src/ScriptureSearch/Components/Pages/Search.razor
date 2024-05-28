@@ -61,7 +61,7 @@
             @foreach (var result in results)
             {
                 <a href="@GetVerseHyperlink(result)" target="_blank">
-                    <li class="list-group-item"><b>@result.BookShortTitle @result.ChapterNumber:@result.VerseNumber</b> @result.ScriptureText</li>
+                    <li class="list-group-item" title="@result.Distance"><b>@result.BookShortTitle @result.ChapterNumber:@result.VerseNumber</b> @result.ScriptureText</li>
                 </a>
             }
         </ul>

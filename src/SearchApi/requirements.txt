@@ -3,6 +3,7 @@ annotated-types==0.7.0
 anyio==4.4.0
 asgiref==3.8.1
 asttokens==2.4.1
+attrs==23.2.0
 backoff==2.2.1
 bcrypt==4.1.3
 blinker==1.8.2
@@ -12,9 +13,12 @@ certifi==2024.2.2
 charset-normalizer==3.3.2
 chroma-hnswlib==0.7.3
 chromadb==0.5.0
+chromaviz @ git+https://github.com/AkshatKaushik3005/chromaviz/@c42fce307f93c7c120d71994fa0385c28e1a8acc
 click==8.1.7
 coloredlogs==15.0.1
 comm==0.2.2
+contourpy==1.2.1
+cycler==0.12.1
 debugpy==1.8.1
 decorator==5.1.1
 Deprecated==1.2.14
@@ -23,9 +27,12 @@ email_validator==2.1.1
 executing==2.0.1
 fastapi==0.111.0
 fastapi-cli==0.0.4
+fastjsonschema==2.19.1
 filelock==3.14.0
 Flask==3.0.3
+Flask-Cors==4.0.1
 flatbuffers==24.3.25
+fonttools==4.52.3
 fsspec==2024.5.0
 google-auth==2.29.0
 googleapis-common-protos==1.63.0
@@ -45,16 +52,21 @@ itsdangerous==2.2.0
 jedi==0.19.1
 Jinja2==3.1.4
 joblib==1.4.2
+jsonschema==4.22.0
+jsonschema-specifications==2023.12.1
 jupyter_client==8.6.2
 jupyter_core==5.7.2
+kiwisolver==1.4.5
 kubernetes==29.0.0
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
+matplotlib==3.9.0
 matplotlib-inline==0.1.7
 mdurl==0.1.2
 mmh3==4.1.0
 monotonic==1.6
 mpmath==1.3.0
+nbformat==5.10.4
 nest-asyncio==1.6.0
 networkx==3.3
 numpy==1.26.4
@@ -90,6 +102,7 @@ parso==0.8.4
 pexpect==4.9.0
 pillow==10.3.0
 platformdirs==4.2.2
+plotly==5.22.0
 posthog==3.5.0
 prompt-toolkit==3.0.43
 protobuf==4.25.3
@@ -101,6 +114,7 @@ pyasn1_modules==0.4.0
 pydantic==2.7.1
 pydantic_core==2.18.2
 Pygments==2.18.0
+pyparsing==3.1.2
 PyPika==0.48.9
 pyproject_hooks==1.1.0
 python-dateutil==2.9.0.post0
@@ -110,10 +124,12 @@ pytz==2024.1
 PyYAML==6.0.1
 pyzmq==26.0.3
 redis==5.0.4
+referencing==0.35.1
 regex==2024.5.15
 requests==2.32.2
 requests-oauthlib==2.0.0
 rich==13.7.1
+rpds-py==0.18.1
 rsa==4.9
 safetensors==0.4.3
 scikit-learn==1.5.0
