@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+   deploy-application:
+    runs-on: [self-hosted]
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+
+      - name: redeploy application
+        run: |
+          cd ops
+          docker compose pull
+          docker compose build --no-cache
+          docker compose up -d
