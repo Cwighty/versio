@@ -33,6 +33,7 @@ collection = chroma_client.get_or_create_collection('scriptures')
 # Download and unzip the scriptures
 def download_and_unzip_scriptures():
     if not os.path.exists(SCRIPTURES_EXTRACT_PATH):
+        app.logger.info("Downloading and unzipping the scriptures...")
         # Download the file
         response = requests.get(SCRIPTURES_URL)
         with open(SCRIPTURES_ZIP_PATH, 'wb') as file:
@@ -46,6 +47,7 @@ def download_and_unzip_scriptures():
 # Create embeddings from the scriptures
 def create_embeddings():
     if not os.path.exists(EMBEDDINGS_CSV_PATH):
+        app.logger.info("Creating embeddings...")
         df = pd.read_csv(SCRIPTURES_CSV_PATH)
         
         def chunk_text(text, chunk_size=512, overlap=128):
@@ -157,7 +159,7 @@ def search():
     for i in range(len(metadatas)):
         metadatas[i]['distance'] = distances[i]
     
-    metadatas = sorted(metatdatas, key=lambda x: x['distance'])
+    metadatas = sorted(metadatas, key=lambda x: x['distance'])
 
     if threshold:
         threshold = float(threshold)
@@ -172,10 +174,13 @@ def search():
     if not new_testament_enabled:
         metadatas = [metadata for metadata in metadatas if metadata['volume_title'] != 'New Testament']
 
-    return jsonify(metatdatas)
+    return jsonify(metadatas)
 
 if __name__ == '__main__':
+    app.logger.info("Starting the Search API")
     download_and_unzip_scriptures()
     create_embeddings()
     load_embeddings_to_chromadb()
+
+    app.logger.info("Search API started successfully.")
     app.run(host='0.0.0.0', port=5000, debug=True)
