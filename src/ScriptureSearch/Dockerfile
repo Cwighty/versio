@@ -25,6 +25,5 @@ CMD dotnet watch run --no-launch-profile --non-interactive --no-hot-reload
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine AS final
 WORKDIR /app
 COPY --from=build /app .
-RUN npm i
 USER $APP_UID
 ENTRYPOINT ["dotnet", "ScriptureSearch.dll"]
