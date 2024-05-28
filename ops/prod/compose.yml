@@ -12,6 +12,7 @@ services:
       - index_data:/chroma/chroma/
 
   searchapi:
+    platform: linux/amd64
     image: cwighty/versio:latest
     volumes:
       - ../../src/SearchApi:/app
