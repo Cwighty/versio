@@ -5,14 +5,17 @@ services:
       target: final
     environment:
       ASPNETCORE_URLS: http://+:8080
+    restart: always
 
   chroma:
     image: ghcr.io/chroma-core/chroma:latest
     volumes:
       - index_data:/chroma/chroma/
+    restart: always
 
   searchapi:
     image: cwighty/versio:latest
+    restart: always
 
   swag:
     container_name: w-swag

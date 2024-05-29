@@ -82,6 +82,9 @@ def create_embeddings():
 
 # Load embeddings into ChromaDB
 def load_embeddings_to_chromadb():
+    if os.path.exists('embeddings_loaded.txt'):
+        app.logger.info("Embeddings already loaded into ChromaDB.")
+        return
     embedding_df = pd.read_csv(EMBEDDINGS_CSV_PATH)
     embedding_df['chunk_id'] = embedding_df.index
     embedding_df['embedding'] = embedding_df['embedding'].apply(lambda x: np.fromstring(x.strip('[]'), sep=','))
@@ -122,6 +125,10 @@ def load_embeddings_to_chromadb():
             )
     
     add_data_in_batches(embedding_df, batch_size=10000)
+
+    # write a file to indicate that the embeddings have been loaded
+    with open('embeddings_loaded.txt', 'w') as f:
+        f.write('Embeddings loaded into ChromaDB.')    
     app.logger.info("Embeddings loaded into ChromaDB.")
 
 # Function to query the database based on a text query
