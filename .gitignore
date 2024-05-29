@@ -11,6 +11,7 @@ chroma/*
 embeddings/*
 **/lds-scriptures*/*
 **/embeddings/*
+lds-scriptures.zip
 
 # dotenv files
 .env

@@ -30,8 +30,8 @@ services:
       - DUCKDNSTOKEN=${DUCKDNSTOKEN}
       - STAGING=false
     volumes:
-      - /home/github/data/swag:/config
-      - ./swag_default.conf:/config/nginx/site-confs/default.conf
+      - swag:/config
+      - ./swag-default.conf:/config/nginx/site-confs/default.conf
     ports:
       - 0.0.0.0:443:443
     restart: unless-stopped
@@ -39,3 +39,4 @@ services:
 volumes:
   index_data:
     driver: local
+  swag:
