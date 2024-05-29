@@ -9,7 +9,7 @@ on:
 
 jobs:
    deploy-application:
-    runs-on: [self-hosted, x86]
+    runs-on: [X64]
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
