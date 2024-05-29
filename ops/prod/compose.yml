@@ -15,8 +15,6 @@ services:
 
   searchapi:
     image: cwighty/versio:latest
-    volumes:
-      - ../../src/SearchApi:/app
 
   swag:
     container_name: w-swag
