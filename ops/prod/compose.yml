@@ -11,11 +11,15 @@ services:
     image: ghcr.io/chroma-core/chroma:latest
     volumes:
       - index_data:/chroma/chroma/
+    ports:
+      - 27837:8000
     restart: always
 
   searchapi:
     image: cwighty/versio:latest
     restart: always
+    volumes:
+      - api-data:/app
 
   swag:
     container_name: w-swag
@@ -41,3 +45,4 @@ volumes:
   index_data:
     driver: local
   swag:
+  api-data:

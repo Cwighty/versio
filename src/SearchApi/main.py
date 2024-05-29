@@ -82,7 +82,7 @@ def create_embeddings():
 
 # Load embeddings into ChromaDB
 def load_embeddings_to_chromadb():
-    if os.path.exists('embeddings_loaded.txt'):
+    if os.path.exists('./embeddings_loaded.txt'):
         app.logger.info("Embeddings already loaded into ChromaDB.")
         return
     embedding_df = pd.read_csv(EMBEDDINGS_CSV_PATH)
@@ -185,9 +185,5 @@ def search():
 
 if __name__ == '__main__':
     app.logger.info("Starting the Search API")
-    download_and_unzip_scriptures()
-    create_embeddings()
-    load_embeddings_to_chromadb()
-
     app.logger.info("Search API started successfully.")
     app.run(host='0.0.0.0', port=5000, debug=True)
