@@ -3,6 +3,8 @@ services:
     build:
       context: ../../src/ScriptureSearch/
       target: final
+    environment:
+      ASPNETCORE_URLS: http://+:8080
     ports:
       - 8080:8080
 
@@ -12,10 +14,29 @@ services:
       - index_data:/chroma/chroma/
 
   searchapi:
-    platform: linux/amd64
     image: cwighty/versio:latest
     volumes:
       - ../../src/SearchApi:/app
+
+  swag:
+    container_name: w-swag
+    image: lscr.io/linuxserver/swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Denver
+      - URL=versio.duckdns.org
+      - VALIDATION=duckdns
+      - DUCKDNSTOKEN=${DUCKDNSTOKEN}
+      - STAGING=false
+    volumes:
+      - /home/github/data/swag:/config
+      - ./swag-default.conf:/config/nginx/site-confs/default.conf
+    ports:
+      - 0.0.0.0:443:443
+    restart: unless-stopped
 
 volumes:
   index_data:
