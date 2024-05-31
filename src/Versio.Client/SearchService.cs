@@ -1,8 +1,12 @@
+using Versio.Shared;
+
 public class SearchService : ISearchService
 {
+    private readonly IEmbedderService embedder;
 
-    public SearchService()
+    public SearchService(IEmbedderService embedder)
     {
+        this.embedder = embedder;
     }
 
     public double Threshold { get; set; } = 1.5;
@@ -30,14 +34,8 @@ public class SearchService : ISearchService
             { "ot", OldTestamentEnabled.ToString() }
         };
 
+        var embedding = embedder.GetEmbeddings(query);
 
-        string url = $"http://searchapi:5000/search?query={query}";
-
-        foreach (var param in paramObject)
-        {
-            url += $"&{param.Key}={param.Value}";
-        }
-
-        throw new NotImplementedException();
+        throw new Exception(embedding.First().ToString());
     }
 }

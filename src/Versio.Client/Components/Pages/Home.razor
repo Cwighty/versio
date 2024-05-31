@@ -1,3 +1,38 @@
 ﻿@page "/"
+@inject NavigationManager NavigationManager
 
-<Search />
+<div class="text-center">Loading...</div>
+
+
+@code{
+    protected override async Task OnInitializedAsync()
+    {
+
+        using var stream = await FileSystem.OpenAppPackageFileAsync("model.onnx");
+
+        // write to file
+        var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        var fullPath = Path.Combine(appDirectory, "model.onnx");
+
+        using (var fileStream = File.Create(fullPath))
+        {
+            await stream.CopyToAsync(fileStream);
+        }
+
+        using var vocabStream = await FileSystem.OpenAppPackageFileAsync("base_cased.txt");
+        var vocabDirectoryName = "Vocabularies";
+        var vocabDirectoryPath = Path.Combine(appDirectory, vocabDirectoryName);
+        var vocabPath = Path.Combine(vocabDirectoryPath, "base_cased.txt");
+
+        //create vocab directory
+        if (!Directory.Exists(vocabDirectoryPath))
+            Directory.CreateDirectory(vocabDirectoryPath);
+
+        using (var fileStream = File.Create(vocabPath))
+        {
+            await vocabStream.CopyToAsync(fileStream);
+        }
+
+        NavigationManager.NavigateTo("/search");
+    }
+}

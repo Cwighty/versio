@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Versio.Shared;
 
 namespace Versio.Client;
 
@@ -16,6 +17,8 @@ public static class MauiProgram
 
         builder.Services.AddMauiBlazorWebView();
         builder.Services.AddScoped<ISearchService, SearchService>();
+        var modelPath = "model.onnx";
+        builder.Services.AddSingleton<IEmbedderService, EmbedderService>((e) => new EmbedderService(modelPath));
 
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();
