@@ -1,4 +1,5 @@
 ﻿
+namespace Versio.Shared;
 public interface ISearchService
 {
     bool BookOfMormonEnabled { get; set; }

@@ -493,5 +493,6 @@ $RECYCLE.BIN/
 # Vim temporary swap files
 *.swp
 src/SearchApi/lds-scriptures.zip
-/src/Versio.Client/Resources/Raw/model.onnx
-/src/Versio.Client/Resources/Raw/scriptures-32-overlap-16.db
+*.db
+*.onnx
+*.zip

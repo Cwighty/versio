@@ -7,30 +7,56 @@
 @code{
     protected override async Task OnInitializedAsync()
     {
-
-        using var stream = await FileSystem.OpenAppPackageFileAsync("model.onnx");
-
-        // write to file
         var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        var fullPath = Path.Combine(appDirectory, "model.onnx");
 
-        using (var fileStream = File.Create(fullPath))
+
+        var scripturePath = Path.Combine(appDirectory, "scriptures.db");
+
+        //delete the file if it exists
+        if (File.Exists(scripturePath))
         {
-            await stream.CopyToAsync(fileStream);
+            File.Delete(scripturePath);
         }
 
-        using var vocabStream = await FileSystem.OpenAppPackageFileAsync("base_cased.txt");
+        if (!File.Exists(scripturePath))
+        {
+            using var scripturestream = await FileSystem.OpenAppPackageFileAsync("scriptures-32-overlap-16-bm25.db");
+            using (var fileStream = File.Create(scripturePath))
+            {
+                await scripturestream.CopyToAsync(fileStream);
+            }
+        }
+
+
+
+        // write to file
+        var modelPath = Path.Combine(appDirectory, "model.onnx");
+
+        if (!File.Exists(modelPath))
+        {
+            using var modelStream = await FileSystem.OpenAppPackageFileAsync("model.onnx");
+            using (var fileStream = File.Create(modelPath))
+            {
+                await modelStream.CopyToAsync(fileStream);
+            }
+        }
+
+
         var vocabDirectoryName = "Vocabularies";
         var vocabDirectoryPath = Path.Combine(appDirectory, vocabDirectoryName);
         var vocabPath = Path.Combine(vocabDirectoryPath, "base_cased.txt");
 
-        //create vocab directory
-        if (!Directory.Exists(vocabDirectoryPath))
-            Directory.CreateDirectory(vocabDirectoryPath);
-
-        using (var fileStream = File.Create(vocabPath))
+        if (!File.Exists(vocabPath))
         {
-            await vocabStream.CopyToAsync(fileStream);
+            using var vocabStream = await FileSystem.OpenAppPackageFileAsync("base_cased.txt");
+
+            if (!Directory.Exists(vocabDirectoryPath))
+                Directory.CreateDirectory(vocabDirectoryPath);
+
+            using (var fileStream = File.Create(vocabPath))
+            {
+                await vocabStream.CopyToAsync(fileStream);
+            }
         }
 
         NavigationManager.NavigateTo("/search");
