@@ -9,56 +9,27 @@
     {
         var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-
-        var scripturePath = Path.Combine(appDirectory, "scriptures.db");
-
-        //delete the file if it exists
-        if (File.Exists(scripturePath))
-        {
-            File.Delete(scripturePath);
-        }
-
-        if (!File.Exists(scripturePath))
-        {
-            using var scripturestream = await FileSystem.OpenAppPackageFileAsync("scriptures-32-overlap-16-bm25.db");
-            using (var fileStream = File.Create(scripturePath))
-            {
-                await scripturestream.CopyToAsync(fileStream);
-            }
-        }
-
-
-
-        // write to file
-        var modelPath = Path.Combine(appDirectory, "model.onnx");
-
-        if (!File.Exists(modelPath))
-        {
-            using var modelStream = await FileSystem.OpenAppPackageFileAsync("model.onnx");
-            using (var fileStream = File.Create(modelPath))
-            {
-                await modelStream.CopyToAsync(fileStream);
-            }
-        }
-
-
-        var vocabDirectoryName = "Vocabularies";
-        var vocabDirectoryPath = Path.Combine(appDirectory, vocabDirectoryName);
-        var vocabPath = Path.Combine(vocabDirectoryPath, "base_cased.txt");
-
-        if (!File.Exists(vocabPath))
-        {
-            using var vocabStream = await FileSystem.OpenAppPackageFileAsync("base_cased.txt");
-
-            if (!Directory.Exists(vocabDirectoryPath))
-                Directory.CreateDirectory(vocabDirectoryPath);
-
-            using (var fileStream = File.Create(vocabPath))
-            {
-                await vocabStream.CopyToAsync(fileStream);
-            }
-        }
+        await HandleFileAsync(appDirectory, "scriptures.db", "scriptures-32-overlap-16-bm25.db");
+        await HandleFileAsync(appDirectory, "model.onnx", "model.onnx");
+        await HandleFileAsync(appDirectory, "vocab.txt", "vocab.txt");
 
         NavigationManager.NavigateTo("/search");
+    }
+
+    private async Task HandleFileAsync(string directoryPath, string targetFileName, string sourceFileName)
+    {
+        if (!Directory.Exists(directoryPath))
+        {
+            Directory.CreateDirectory(directoryPath);
+        }
+
+        var targetFilePath = Path.Combine(directoryPath, targetFileName);
+
+        if (!File.Exists(targetFilePath))
+        {
+            using var sourceStream = await FileSystem.OpenAppPackageFileAsync(sourceFileName);
+            using var fileStream = File.Create(targetFilePath);
+            await sourceStream.CopyToAsync(fileStream);
+        }
     }
 }

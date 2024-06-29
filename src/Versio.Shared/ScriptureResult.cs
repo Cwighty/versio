@@ -43,5 +43,15 @@ public record ScriptureResult
 
     [JsonPropertyName("distance")]
     public double Distance { get; set; }
+
+    public List<VerseChunk> Chunks { get; set; } 
+}
+
+public class VerseChunk
+{
+    public int Id { get; set; }
+    public int VerseId { get; set; }
+    public string Text { get; set; }
+    public double[] Embedding { get; set; }
 }
 

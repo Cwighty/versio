@@ -62,7 +62,6 @@
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-        <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.18.0" />
     </ItemGroup>
 
     <!-- Add SCSS files to dotnet watch -->
@@ -75,8 +74,8 @@
   <ItemGroup>
     <ComponentScssFiles Include="**/*/*.scss" Exclude="node_modules/**;wwwroot/**;Styles/**" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Versio.Shared\Versio.Shared.csproj" />
+	<ItemGroup>
+		<ProjectReference Include="..\Versio.Shared\Versio.Shared.csproj" />
   </ItemGroup>
 
   <Target Name="CompileGlobalSass" BeforeTargets="Compile">

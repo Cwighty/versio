@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScriptureSearch", "Scriptur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Versio.Client", "Versio.Client\Versio.Client.csproj", "{A0D606F0-3F88-452D-BDD9-3C02DA63DD63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Versio.Shared", "Versio.Shared\Versio.Shared.csproj", "{5F78B530-31F0-423E-97CA-2CAF77D8E99E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Versio.Shared", "Versio.Shared\Versio.Shared.csproj", "{5F78B530-31F0-423E-97CA-2CAF77D8E99E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptureEmbedder", "ScriptureEmbedder\ScriptureEmbedder.csproj", "{0087588B-4D1B-4D7C-AFD7-CC5700D7BB94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VectorEmbedder", "ScriptureEmbedder\VectorEmbedder.csproj", "{0087588B-4D1B-4D7C-AFD7-CC5700D7BB94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
