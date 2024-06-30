@@ -15,14 +15,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="msmarco-distilbert-base-v3.onnx">
+	  <None Update="all-MiniLM-L6-v2-vocab.txt">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="all-MiniLM-L6-v2.onnx">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="msmarco-distilbert-base-v3.onnx">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	  <None Update="scriptures.db">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
-	  <None Update="vocab.txt">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  <None Update="msmarco-vocab.txt">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
 	</ItemGroup>
 

@@ -1,10 +1,13 @@
-﻿public class Program
+﻿using Versio.Shared;
+
+public class Program
 {
     public static void Main(string[] args)
     {
-        var embedder = new ScriptureEmbedder("./msmarco-distilbert-base-v3.onnx", "./vocab.txt");
-        var processedDbPath = embedder.DestinateDbPath("./scriptures_with_embeddings.db");
-        embedder.ProcessScriptures("./scriptures.db", "./scriptures_with_embeddings.db");
+        var embeddingService = new AllMiniLmEmbedder("./all-MiniLM-L6-v2.onnx", "./all-MiniLM-L6-v2-vocab.txt");
+        var embedder = new ScriptureEmbedder(embeddingService);
+        var processedDbPath = embedder.DestinateDbPath("./");
+        embedder.ProcessScriptures("./scriptures.db", "./");
         Console.WriteLine("Embedding complete.");
 
         var scorer = new BM25Scorer(processedDbPath);

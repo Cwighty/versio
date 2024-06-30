@@ -16,9 +16,12 @@ public static class MauiProgram
             });
 
         builder.Services.AddMauiBlazorWebView();
-        builder.Services.AddScoped<ISearchService, BM25Search>();
+        builder.Services.AddScoped<ISearchService, VectorSearch>();
+        builder.Services.AddKeyedScoped<ISearchService, BM25Search>(SearchAlgorithmOptions.BM25);
+        builder.Services.AddKeyedScoped<ISearchService, VectorSearch>(SearchAlgorithmOptions.KNNVectorSimiliarity);
         var modelPath = "model.onnx";
-        //builder.Services.AddSingleton<IEmbedderService, EmbedderService>((e) => new EmbedderService(modelPath));
+        var vocabPath = "vocab.txt";
+        builder.Services.AddSingleton<IEmbedderService, AllMiniLmEmbedder>((e) => new AllMiniLmEmbedder(modelPath, vocabPath));
 
 #if DEBUG
 		builder.Services.AddBlazorWebViewDeveloperTools();

@@ -1,12 +1,17 @@
+using Microsoft.Extensions.DependencyInjection;
 using Versio.Shared;
 
-public class SearchService : ISearchService
+public class CombinedSearch : ISearchService
 {
-    private readonly IEmbedderService embedder;
+    private ISearchService bm25Search;
+    private ISearchService vectorSearch;
 
-    public SearchService(IEmbedderService embedder)
+    // inject keyed services
+
+    public CombinedSearch(IServiceProvider services)
     {
-        this.embedder = embedder;
+        bm25Search = services.GetRequiredKeyedService<ISearchService>(SearchAlgorithmOptions.BM25);
+        vectorSearch = services.GetRequiredKeyedService<ISearchService>(SearchAlgorithmOptions.KNNVectorSimiliarity);
     }
 
     public double Threshold { get; set; } = 1.5;
@@ -34,8 +39,10 @@ public class SearchService : ISearchService
             { "ot", OldTestamentEnabled.ToString() }
         };
 
-        var embedding = embedder.GetEmbeddings(query);
+        var bm25Results = await bm25Search.SearchAsync(query);
 
-        throw new Exception(embedding.First().ToString());
+        var vectorResults = await vectorSearch.SearchAsync(query);
+
+        return bm25Results.Concat(vectorResults).ToList();
     }
 }

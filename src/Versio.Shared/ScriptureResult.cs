@@ -52,6 +52,6 @@ public class VerseChunk
     public int Id { get; set; }
     public int VerseId { get; set; }
     public string Text { get; set; }
-    public double[] Embedding { get; set; }
+    public float[] Embedding { get; set; }
 }
 

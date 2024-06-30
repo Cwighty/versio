@@ -9,9 +9,10 @@
     {
         var appDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
-        await HandleFileAsync(appDirectory, "scriptures.db", "scriptures-32-overlap-16-bm25.db");
-        await HandleFileAsync(appDirectory, "model.onnx", "model.onnx");
-        await HandleFileAsync(appDirectory, "vocab.txt", "vocab.txt");
+        await HandleFileAsync(appDirectory, "scriptures.db", "scriptures-32-16.db");
+        // await HandleFileAsync(appDirectory, "model.onnx", "msmarco-distilbert-base-v3.onnx");
+        await HandleFileAsync(appDirectory, "model.onnx", "all-MiniLM-L6-v2.onnx");
+        await HandleFileAsync(appDirectory, "vocab.txt", "all-MiniLM-L6-v2-vocab.txt");
 
         NavigationManager.NavigateTo("/search");
     }

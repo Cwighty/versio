@@ -496,3 +496,6 @@ src/SearchApi/lds-scriptures.zip
 *.db
 *.onnx
 *.zip
+/src/Versio.Client/Resources/Raw/all-MiniLM-L6-v2-vocab.txt
+/src/ScriptureEmbedder/all-MiniLM-L6-v2-vocab.txt
+/src/ScriptureEmbedder/msmarco-vocab.txt

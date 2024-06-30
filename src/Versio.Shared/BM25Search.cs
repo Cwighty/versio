@@ -75,7 +75,7 @@ public class BM25Search : ISearchService
                 bm25_scores.score,
                 verse_chunks.id AS chunk_id,
                 verse_chunks.verse_id AS chunk_verse_id,
-                verse_chunks.text AS chunk_text,
+                verse_chunks.chunk_text AS chunk_text,
                 verse_chunks.embedding AS chunk_embedding
             FROM bm25_scores
             JOIN verses ON bm25_scores.verse_id = verses.id
@@ -130,7 +130,7 @@ public class BM25Search : ISearchService
                             Id = reader.GetInt32(reader.GetOrdinal("chunk_id")),
                             VerseId = reader.GetInt32(reader.GetOrdinal("chunk_verse_id")),
                             Text = reader.GetString(reader.GetOrdinal("chunk_text")),
-                            Embedding = JsonConvert.DeserializeObject<double[]>(reader.GetString(reader.GetOrdinal("chunk_embedding")))
+                            Embedding = JsonConvert.DeserializeObject<float[]>(reader.GetString(reader.GetOrdinal("chunk_embedding")))
                         };
                         scriptureResult.Chunks.Add(chunk);
                     }

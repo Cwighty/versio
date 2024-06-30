@@ -1,14 +1,15 @@
 ﻿using Microsoft.Data.Sqlite;
+using Versio.Shared;
 
 public class ScriptureEmbedder
 {
     private const int MaxChunkLength = 32;
     private const int ChunkOverlap = 16;
-    private EmbeddingGenerator embedder;
+    private IEmbedderService embedder;
 
-    public ScriptureEmbedder(string modelPath, string vocabPath)
+    public ScriptureEmbedder(IEmbedderService embedder)
     {
-        embedder = new EmbeddingGenerator(modelPath, vocabPath);
+        this.embedder = embedder;
     }
 
     private List<string> ChunkText(string text)
@@ -52,12 +53,13 @@ public class ScriptureEmbedder
 
     public string DestinateDbPath(string destinationPath)
     {
-        string destDbFileName = $"scriptures_chunk{MaxChunkLength}_overlap{ChunkOverlap}.db";
+        string destDbFileName = $"scriptures-{MaxChunkLength}-{ChunkOverlap}.db";
         return Path.Combine(Path.GetDirectoryName(destinationPath), destDbFileName);
     }
 
     public string ProcessScriptures(string sourceDbPath, string destDbPath)
     {
+        sourceDbPath = Path.GetFullPath(sourceDbPath);
         destDbPath = DestinateDbPath(destDbPath);
 
         // delete dest if exists
