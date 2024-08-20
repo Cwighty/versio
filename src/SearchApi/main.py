@@ -88,7 +88,7 @@ def create_embeddings():
 
 # Load embeddings into ChromaDB
 def load_embeddings_to_chromadb():
-    if os.path.exists("./embeddings_loaded.txt"):
+    if os.path.exists(EMBEDDINGS_CSV_PATH):
         app.logger.info("Embeddings already loaded into ChromaDB.")
         return
     embedding_df = pd.read_csv(EMBEDDINGS_CSV_PATH)
